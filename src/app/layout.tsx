@@ -1,0 +1,47 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import CustomCursor from "@/components/ui/CustomCursor";
+import ScrollToTop from "@/components/ui/ScrollToTop";
+
+import Preloader from "@/components/ui/Preloader";
+import SpotifyWidget from "@/components/ui/SpotifyWidget";
+
+
+export const metadata: Metadata = {
+  title: "Paradox Portfolio",
+  description: "A creative portfolio showcasing brutalist design.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-red-600 selection:text-white`}
+      >
+        <Preloader />
+        <CustomCursor />
+        <ScrollProgress />
+        <ScrollToTop />
+        <SpotifyWidget />
+        {children}
+      </body>
+    </html>
+  );
+}
