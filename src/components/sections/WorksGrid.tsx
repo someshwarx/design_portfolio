@@ -78,12 +78,18 @@ export default function WorksGrid({ projects = [] }: WorksGridProps) {
     }, { scope: containerRef, dependencies: [displayProjects] });
 
     return (
-        <section ref={containerRef} className="w-full py-20 px-4 md:px-8 bg-background">
+        <section ref={containerRef} className="w-full pb-20 pt-8 md:pt-12 px-4 md:px-8 bg-background">
             {/* Section Header */}
-            <div ref={titleRef} className="flex justify-center mb-16">
-                <h2 className={cn("text-4xl md:text-6xl font-bold tracking-tighter text-neutral-500", syne.className)}>
-                    {`// WORKS //`}
-                </h2>
+            <div ref={titleRef} className="flex flex-col items-center justify-center mb-16 space-y-4 md:space-y-6">
+                <div className="overflow-visible w-full flex justify-center">
+                    <h2 className={cn("text-4xl sm:text-6xl md:text-8xl lg:text-[11vw] font-bold uppercase leading-[0.9] text-[#F0F0F0] whitespace-nowrap text-center tracking-tighter", syne.className)}
+                        style={{ fontWeight: 800 }}>
+                        WORKS
+                    </h2>
+                </div>
+                <p className="text-neutral-400 font-mono text-xs sm:text-sm md:text-base tracking-widest uppercase text-center max-w-2xl">
+                    A collection of visual explorations across branding, posters, album covers, typography, and digital design.
+                </p>
             </div>
 
             {/* Masonry-style Grid (CSS Columns) */}
@@ -116,11 +122,11 @@ export default function WorksGrid({ projects = [] }: WorksGridProps) {
                                     alt={project.title || 'Project Image'}
                                     width={project.dimensions?.width || 1200}
                                     height={project.dimensions?.height || 800}
-                                    className="w-full h-auto block opacity-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    className="w-full h-auto block opacity-100"
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                             ) : (
-                                <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:scale-105 transition-transform duration-700 ease-out pointer-events-none">
+                                <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
                                     <span className={cn("text-6xl md:text-8xl font-black uppercase text-white/10 rotate-[-15deg]", syne.className)}>
                                         {project.title?.substring(0, 3)}
                                     </span>

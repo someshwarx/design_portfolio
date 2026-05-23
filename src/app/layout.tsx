@@ -15,9 +15,11 @@ const geistMono = Geist_Mono({
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollToTop from "@/components/ui/ScrollToTop";
-
 import Preloader from "@/components/ui/Preloader";
-import SpotifyWidget from "@/components/ui/SpotifyWidget";
+import FooterWrapper from "@/components/layout/FooterWrapper";
+import SmoothScroll from "@/components/layout/SmoothScroll";
+import ConsoleMessage from "@/components/ui/ConsoleMessage";
+
 
 
 export const metadata: Metadata = {
@@ -33,14 +35,23 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-red-600 selection:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-red-600 selection:text-white bg-black`}
       >
         <Preloader />
         <CustomCursor />
         <ScrollProgress />
         <ScrollToTop />
-        <SpotifyWidget />
-        {children}
+        <SmoothScroll>
+          <ConsoleMessage />
+          
+          {/* Main content wrapper to mask the footer */}
+          <div className="relative z-10 bg-black w-full shadow-[0_20px_50px_rgba(0,0,0,1)]">
+            {children}
+          </div>
+          
+          {/* Globally sticky parallax footer (conditionally rendered) */}
+          <FooterWrapper />
+        </SmoothScroll>
       </body>
     </html>
   );

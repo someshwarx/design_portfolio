@@ -7,7 +7,7 @@ export default function SilkBackground() {
 
     // Store state outside the render loop but inside the component instance
     // currentOpacity: 0 = white, 1 = fully red
-    const linesCount = 35;
+    const linesCount = 25;
     const lineOpacities = useRef<number[]>(new Array(linesCount).fill(0));
     const targetOpacities = useRef<number[]>(new Array(linesCount).fill(0));
 
@@ -58,7 +58,7 @@ export default function SilkBackground() {
             ctx.clearRect(0, 0, width, height);
 
             t += 0.005;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 2.5;
 
             for (let i = 0; i < linesCount; i++) {
                 // Smoothly interpolate current opacity towards target
@@ -90,7 +90,7 @@ export default function SilkBackground() {
                 const y = height / 2 + (i - linesCount / 2) * 15;
 
                 // Draw points across width
-                for (let x = 0; x <= width; x += 10) {
+                for (let x = 0; x <= width; x += 35) {
                     // Sine wave combinations
                     // 1. Slow large wave
                     const y1 = Math.sin(x * 0.002 + t + i * 0.05) * 100;

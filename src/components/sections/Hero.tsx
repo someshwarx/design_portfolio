@@ -35,7 +35,23 @@ export default function Hero({
                 x: -50,
                 opacity: 0,
                 duration: 1
-            }, '-=1');
+            }, '-=1')
+            .from('.hero-scroll', {
+                y: 20,
+                opacity: 0,
+                duration: 1
+            }, '-=0.5');
+
+        // Infinite scroll line animation
+        gsap.fromTo('.scroll-line-inner', 
+            { yPercent: -100 },
+            { 
+                yPercent: 100, 
+                duration: 1.5, 
+                repeat: -1, 
+                ease: 'power2.inOut' 
+            }
+        );
 
     }, { scope: containerRef });
 
@@ -48,17 +64,9 @@ export default function Hero({
             )}
         >
             <div ref={textRef} className="max-w-5xl space-y-6 z-10 flex flex-col items-center text-center">
-                <div className="overflow-visible w-full flex flex-col items-center justify-center">
+                <div className="overflow-visible w-full flex justify-center">
                     <h1 className={cn("hero-line text-4xl sm:text-6xl md:text-8xl lg:text-[12vw] font-bold uppercase leading-[0.9] text-[#F0F0F0] whitespace-nowrap text-center", syne.className)}
                         style={{ fontWeight: 800 }}>
-                        PARADOX
-                    </h1>
-                    <h1 className={cn("hero-line text-4xl sm:text-6xl md:text-8xl lg:text-[12vw] font-bold uppercase leading-[0.8] whitespace-nowrap text-center", syne.className)}
-                        style={{ 
-                            fontWeight: 800,
-                            color: 'transparent',
-                            WebkitTextStroke: '1px #F0F0F0'
-                        }}>
                         PARADOX
                     </h1>
                 </div>
@@ -67,6 +75,7 @@ export default function Hero({
                     {subtitle}
                 </p>
 
+
             </div>
 
             {/* Silk Animation Background */}
@@ -74,6 +83,16 @@ export default function Hero({
 
             {/* Background Noise/Texture */}
             <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150"></div>
+
+            {/* Scroll Indicator */}
+            <div className="hero-scroll absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20 mix-blend-difference pointer-events-none">
+                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-white opacity-50">
+                    Scroll
+                </span>
+                <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
+                    <div className="scroll-line-inner absolute top-0 left-0 w-full h-full bg-white" />
+                </div>
+            </div>
         </section>
     );
 }
