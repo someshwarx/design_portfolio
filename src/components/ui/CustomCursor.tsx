@@ -28,7 +28,7 @@ export default function CustomCursor() {
                 width: cursorSize,
                 height: cursorSize
             }}
-            className="fixed top-0 left-0 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center will-change-transform"
+            className="fixed top-0 left-0 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference items-center justify-center will-change-transform hidden md:flex"
         >
             <span className="text-black text-[10px] font-bold mb-[1px]">+</span>
         </motion.div>

@@ -26,22 +26,24 @@ export default async function Home() {
       <WorksGrid projects={projects} />
 
       {/* Design Mantra Section */}
-      <section className="w-full py-20 flex justify-center items-center text-center px-4 border-t-[0.5px] border-white/10">
-        <h2 className={cn("text-3xl md:text-5xl lg:text-[5vw] font-bold uppercase leading-none tracking-tighter text-[#F0F0F0] whitespace-nowrap", syne.className)}>
+      <section className="w-full py-20 flex justify-center items-center text-center px-6 border-t-[0.5px] border-white/10 overflow-hidden">
+        <h2 className={cn("text-4xl md:text-5xl lg:text-[7vw] font-bold uppercase leading-[0.9] tracking-tighter text-[#F0F0F0] flex flex-wrap justify-center gap-x-4", syne.className)}>
           <HoverItalicText text="DESIGN THAT" /> <HoverItalicText text="MOVES" className="text-red-600" /> <HoverItalicText text="THE WORLD" />
         </h2>
       </section>
 
       {/* Footer mimic */}
       <footer className="w-full py-20 border-t-[0.5px] border-white/10 flex flex-col items-center justify-center text-center overflow-hidden">
-        <h2 className={cn("text-6xl md:text-8xl lg:text-[12vw] font-bold uppercase leading-[0.9] text-[#252525]", syne.className)}
+        <h2 className={cn("text-5xl sm:text-7xl md:text-8xl lg:text-[12vw] font-bold uppercase leading-[0.9] text-[#252525] whitespace-nowrap text-center", syne.className)}
           style={{ fontWeight: 800 }}>
           PARADOX
         </h2>
-        <div className="flex justify-between w-full max-w-6xl px-8 mt-8 text-neutral-500 font-mono text-xs md:text-sm">
-          <SpotifyFooter />
-          <p>© 2026 PARADOX. ALL RIGHTS RESERVED.</p>
-          <div className="flex gap-2">
+        <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-6xl px-8 mt-12 gap-8 md:gap-0 text-neutral-500 font-mono text-xs md:text-sm">
+          <div className="order-2 md:order-1">
+            <SpotifyFooter />
+          </div>
+          <p className="order-3 md:order-2">© 2026 PARADOX. ALL RIGHTS RESERVED.</p>
+          <div className="flex gap-4 order-1 md:order-3">
             <a href="https://www.instagram.com/paradox.x0/" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors">INSTAGRAM</a>
             <span>/</span>
             <a href="https://x.com/somesh__x1" target="_blank" rel="noopener noreferrer" className="hover:text-red-500 transition-colors">X</a>

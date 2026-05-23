@@ -48,23 +48,25 @@ export default function Hero({
             )}
         >
             <div ref={textRef} className="max-w-5xl space-y-6 z-10 flex flex-col items-center text-center">
-                <div className="overflow-hidden">
-                    <h1 className={cn("hero-line text-6xl md:text-8xl lg:text-[12vw] font-bold uppercase leading-[0.9] text-[#F0F0F0]", syne.className)}
+                <div className="overflow-visible w-full flex flex-col items-center justify-center">
+                    <h1 className={cn("hero-line text-4xl sm:text-6xl md:text-8xl lg:text-[12vw] font-bold uppercase leading-[0.9] text-[#F0F0F0] whitespace-nowrap text-center", syne.className)}
                         style={{ fontWeight: 800 }}>
+                        PARADOX
+                    </h1>
+                    <h1 className={cn("hero-line text-4xl sm:text-6xl md:text-8xl lg:text-[12vw] font-bold uppercase leading-[0.8] whitespace-nowrap text-center", syne.className)}
+                        style={{ 
+                            fontWeight: 800,
+                            color: 'transparent',
+                            WebkitTextStroke: '1px #F0F0F0'
+                        }}>
                         PARADOX
                     </h1>
                 </div>
 
-                <p className="hero-desc text-red-600 font-mono text-sm md:text-base tracking-widest mt-4 font-bold">
+                <p className="hero-desc text-red-600 font-mono text-xs sm:text-sm md:text-base tracking-widest mt-4 font-bold max-w-[90vw] mx-auto leading-relaxed">
                     {subtitle}
                 </p>
 
-                <div className="hero-desc max-w-xl mt-8">
-                    <p className="text-neutral-400 text-sm md:text-base leading-relaxed font-mono">
-                        Specialized in high-impact visual identities and digital products.
-                        Breaking conventions to build memorable brand experiences.
-                    </p>
-                </div>
             </div>
 
             {/* Silk Animation Background */}

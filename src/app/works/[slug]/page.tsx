@@ -49,16 +49,16 @@ export default async function ProjectPage({ params }: PageProps) {
                 </div>
 
                 <div className="relative z-10 max-w-7xl w-full">
-                    <h1 className={cn("text-6xl md:text-8xl lg:text-9xl font-bold uppercase leading-none tracking-tighter text-white", syne.className)}>
+                    <h1 className={cn("text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.9] tracking-tighter text-white break-words", syne.className)}>
                         {project.title}
                     </h1>
                     <div className="mt-6 flex flex-col md:flex-row gap-8 md:items-end justify-between border-t border-white/20 pt-6">
                         <div className="max-w-xl">
-                            <p className="text-lg md:text-xl text-neutral-300 font-light font-mono leading-relaxed">
+                            <p className="text-base sm:text-lg md:text-xl text-neutral-300 font-light font-mono leading-relaxed">
                                 {project.description || "No description provided."}
                             </p>
                         </div>
-                        <div className="flex gap-12 font-mono text-xs md:text-sm text-neutral-500 uppercase tracking-widest">
+                        <div className="flex gap-8 sm:gap-12 font-mono text-[10px] sm:text-xs md:text-sm text-neutral-500 uppercase tracking-widest mt-4 md:mt-0">
                             <div>
                                 <span className="block text-white mb-1">Date</span>
                                 {project.publishedAt ? new Date(project.publishedAt).getFullYear() : '2026'}
@@ -82,10 +82,10 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {/* Footer mimic */}
             <footer className="w-full py-20 border-t border-white/10 flex flex-col items-center justify-center text-center overflow-hidden">
-                <h2 className="text-[15vw] font-bold text-neutral-900 leading-none select-none pointer-events-none tracking-tighter" style={{ fontFamily: 'var(--font-syne)' }}>
+                <h2 className={cn("text-[12vw] font-bold text-neutral-900 leading-none select-none pointer-events-none tracking-tighter whitespace-nowrap text-center", syne.className)}>
                     PARADOX
                 </h2>
-                <div className="flex justify-between w-full max-w-6xl px-8 mt-8 text-neutral-500 font-mono text-xs md:text-sm">
+                <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-6xl px-8 mt-12 gap-8 md:gap-0 text-neutral-500 font-mono text-xs md:text-sm">
                     <p>SEOUL / NEW YORK</p>
                     <p>© 2026 PARADOX STUDIO. ALL RIGHTS RESERVED.</p>
                 </div>

@@ -101,9 +101,9 @@ export default function WorksGrid({ projects = [] }: WorksGridProps) {
                                 aspectRatio: imageUrl ? 'auto' : aspectRatio
                             }}
                         >
-                            {/* Bottom Right Title (Hover) */}
-                            <div className="absolute bottom-4 right-4 z-20 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                                <span className="text-xs font-mono bg-black/80 px-2 py-1 border border-white/20 text-white/60 uppercase">
+                            {/* Bottom Right Title (Hover/Mobile Visible) */}
+                            <div className="absolute bottom-4 right-4 z-20 md:translate-y-8 md:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out translate-y-0 opacity-100">
+                                <span className="text-[10px] md:text-xs font-mono bg-black/80 px-2 py-1 border border-white/20 text-white/60 uppercase">
                                     {project.title}
                                 </span>
                             </div>
