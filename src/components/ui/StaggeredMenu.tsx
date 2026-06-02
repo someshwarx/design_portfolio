@@ -63,6 +63,10 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const textWrapRef = useRef<HTMLSpanElement | null>(null);
   const [textLines, setTextLines] = useState<string[]>(['Menu', 'Close']);
 
+  const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
   const openTlRef = useRef<gsap.core.Timeline | null>(null);
   const closeTweenRef = useRef<gsap.core.Tween | null>(null);
   const spinTweenRef = useRef<gsap.core.Tween | null>(null);
@@ -83,6 +87,35 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       document.body.style.overflow = '';
     };
   }, [open]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Glassmorphism state when scrolled past 20px
+      if (currentScrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+
+      // Dynamic reveal state: hide on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -397,9 +430,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     };
   }, [closeOnClickAway, open, closeMenu]);
 
+  const wrapperClass = [
+    className || '',
+    'staggered-menu-wrapper',
+    isFixed ? 'fixed-wrapper' : '',
+    scrolled ? 'scrolled' : '',
+    visible ? 'nav-visible' : 'nav-hidden'
+  ].filter(Boolean).join(' ');
+
   return (
     <div
-      className={(className ? className + ' ' : '') + 'staggered-menu-wrapper' + (isFixed ? ' fixed-wrapper' : '')}
+      className={wrapperClass}
       style={accentColor ? { ['--sm-accent' as any]: accentColor } : undefined}
       data-position={position}
       data-open={open || undefined}
@@ -421,7 +462,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </div>
         <button
           ref={toggleBtnRef}
-          className="sm-toggle font-mono uppercase tracking-widest text-sm"
+          className="sm-toggle font-mono uppercase tracking-[0.2em] text-xs font-semibold"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           aria-controls="staggered-menu-panel"

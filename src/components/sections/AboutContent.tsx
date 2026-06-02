@@ -26,14 +26,14 @@ export default function AboutContent() {
             variants={container}
             initial="hidden"
             animate="show"
-            className="relative z-10 pt-32 md:pt-40 px-6 md:px-20 max-w-7xl mx-auto flex flex-col gap-12 md:gap-16 pb-20"
+            className="relative z-10 pt-36 md:pt-48 px-page max-w-7xl mx-auto flex flex-col gap-xl md:gap-xxl pb-xxl"
         >
             {/* Intro / Hero of About */}
-            <motion.div variants={item} className="space-y-6">
-                <h1 className={cn("text-4xl sm:text-5xl md:text-7xl lg:text-[8vw] font-bold uppercase leading-[0.9] text-[#F0F0F0] break-words", syne.className)}>
+            <motion.div variants={item} className="flex flex-col gap-md">
+                <h1 className={cn("text-h1 text-[#F0F0F0] break-words", syne.className)}>
                     Architect<br /> of Digital<br /> <span className="text-red-600">Chaos.</span>
                 </h1>
-                <div className="font-mono text-neutral-400 max-w-2xl text-xs sm:text-sm md:text-base leading-relaxed tracking-wide space-y-4">
+                <div className="text-body-base text-neutral-400 max-w-2xl flex flex-col gap-sm">
                     <p>I’m SOMESHWAR aka PARADOX.</p>
                     <p>
                         The name comes from how I design: Balancing opposites. Structure and chaos. Logic and emotion.
@@ -48,10 +48,10 @@ export default function AboutContent() {
             </motion.div>
 
             {/* Philosophy Grid */}
-            <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-white/10 pt-12">
-                <div className="space-y-4">
-                    <h3 className={cn("text-xl md:text-2xl font-bold uppercase", syne.className)}>The Philosophy</h3>
-                    <div className="font-mono text-neutral-400 text-xs md:text-sm leading-relaxed space-y-4">
+            <motion.div variants={item} className="grid grid-cols-1 md:grid-cols-2 gap-lg border-t border-white/10 pt-lg">
+                <div className="flex flex-col gap-sm">
+                    <h3 className={cn("text-h3 text-white", syne.className)}>The Philosophy</h3>
+                    <div className="text-body-small text-neutral-400 flex flex-col gap-sm">
                         <p>Functionality is essential.</p>
                         <p>
                             My design approach sits where brutalism meets elegance. I focus on clarity, strong typography, purposeful motion, and spatial tension.
@@ -59,9 +59,9 @@ export default function AboutContent() {
                         </p>
                     </div>
                 </div>
-                <div className="space-y-4">
-                    <h3 className={cn("text-xl md:text-2xl font-bold uppercase", syne.className)}>The Approach</h3>
-                    <div className="font-mono text-neutral-400 text-xs md:text-sm leading-relaxed space-y-4">
+                <div className="flex flex-col gap-sm">
+                    <h3 className={cn("text-h3 text-white", syne.className)}>The Approach</h3>
+                    <div className="text-body-small text-neutral-400 flex flex-col gap-sm">
                         <p>Design that matters.</p>
                         <p>
                             I break ideas down to their essence and rebuild them into visual systems that communicate with intent.
@@ -72,10 +72,10 @@ export default function AboutContent() {
             </motion.div>
 
             {/* Skills / Tech Stack */}
-            <motion.div variants={item} className="border-t border-white/10 pt-12">
-                <h3 className={cn("text-2xl font-bold uppercase mb-8", syne.className)}>Design Arsenal</h3>
-                <div className="font-mono text-neutral-400 text-sm md:text-base leading-relaxed">
-                    <ul className="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-8">
+            <motion.div variants={item} className="border-t border-white/10 pt-lg">
+                <h3 className={cn("text-h3 text-white mb-md", syne.className)}>Design Arsenal</h3>
+                <div className="text-body-base text-neutral-400">
+                    <ul className="grid grid-cols-2 md:grid-cols-3 gap-y-sm gap-x-md">
                         <li>Figma</li>
                         <li>Blender</li>
                         <li>Adobe Suite</li>
@@ -87,11 +87,11 @@ export default function AboutContent() {
             </motion.div>
 
             {/* Footer Contact Call */}
-            <motion.div variants={item} className="border-t border-white/10 pt-20 pb-10 text-center">
-                <h2 className={cn("text-3xl sm:text-4xl md:text-6xl font-bold uppercase mb-6", syne.className)}>
+            <motion.div variants={item} className="border-t border-white/10 pt-xxl pb-xl text-center">
+                <h2 className={cn("text-h2 text-white mb-md", syne.className)}>
                     Ready to <span className="text-red-600">Collaborate?</span>
                 </h2>
-                <a href="mailto:someshwark22@gmail.com" className="inline-block border border-white/20 px-6 py-3 md:px-8 md:py-4 font-mono text-xs md:text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                <a href="mailto:someshwark22@gmail.com" className="inline-block border border-white/20 px-md py-sm md:px-lg md:py-md text-micro hover:bg-white hover:text-black transition-all">
                     Start a Project
                 </a>
             </motion.div>

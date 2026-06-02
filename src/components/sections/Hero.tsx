@@ -9,12 +9,12 @@ import SilkBackground from '@/components/animations/SilkBackground';
 
 interface HeroProps {
     title?: string;
-    subtitle?: string;
+    subtitle?: React.ReactNode;
     className?: string;
 }
 
 export default function Hero({
-    title = "VISUAL DESIGNER",
+    title = "PARADOX",
     subtitle = "// CRAFTING DIGITAL CHAOS INTO ORDER //",
     className
 }: HeroProps) {
@@ -24,34 +24,18 @@ export default function Hero({
     useGSAP(() => {
         const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-        tl.from('.hero-line', {
-            y: 100,
+        tl.from('.hero-title-wrapper', {
+            y: 50,
             opacity: 0,
             duration: 1.5,
-            stagger: 0.1,
-            skewY: 5
+            skewY: 2
         })
             .from('.hero-desc', {
-                x: -50,
-                opacity: 0,
-                duration: 1
-            }, '-=1')
-            .from('.hero-scroll', {
                 y: 20,
                 opacity: 0,
-                duration: 1
-            }, '-=0.5');
-
-        // Infinite scroll line animation
-        gsap.fromTo('.scroll-line-inner', 
-            { yPercent: -100 },
-            { 
-                yPercent: 100, 
-                duration: 1.5, 
-                repeat: -1, 
-                ease: 'power2.inOut' 
-            }
-        );
+                duration: 1,
+                stagger: 0.2
+            }, '-=1');
 
     }, { scope: containerRef });
 
@@ -59,39 +43,48 @@ export default function Hero({
         <section
             ref={containerRef}
             className={cn(
-                "relative flex min-h-screen flex-col justify-center items-center pt-32 pb-20 px-4 md:px-8 overflow-hidden",
+                "relative flex h-[100dvh] w-full flex-col justify-end items-center overflow-x-clip pb-8 md:pb-12",
                 className
             )}
         >
-            <div ref={textRef} className="max-w-5xl space-y-6 z-10 flex flex-col items-center text-center">
-                <div className="overflow-visible w-full flex justify-center">
-                    <h1 className={cn("hero-line text-4xl sm:text-6xl md:text-8xl lg:text-[12vw] font-bold uppercase leading-[0.9] text-[#F0F0F0] whitespace-nowrap text-center", syne.className)}
-                        style={{ fontWeight: 800 }}>
-                        PARADOX
-                    </h1>
+            <div ref={textRef} className="w-full h-full flex flex-col items-center justify-end relative z-10">
+
+                {/* Scattered/Asymmetrical Subtitle elements to "mess up" the layout */}
+                <div className="hero-desc absolute top-1/4 left-4 md:left-8 max-w-[200px] text-left">
+                    <p className="text-accent-label font-mono text-xs uppercase leading-tight">
+                        {subtitle}
+                    </p>
                 </div>
 
-                <p className="hero-desc text-red-600 font-mono text-xs sm:text-sm md:text-base tracking-widest mt-4 font-bold max-w-[90vw] mx-auto leading-relaxed">
-                    {subtitle}
-                </p>
+                <div className="hero-desc absolute top-1/3 right-4 md:right-8 max-w-[200px] text-right">
+                    <p className="text-white/50 font-sans text-sm">
+                        DESIGN THAT MOVES THE WORLD.
+                    </p>
+                </div>
 
-
+                {/* Massive Typography at the bottom */}
+                <div className="hero-title-wrapper w-full mt-auto flex justify-center items-end px-4 md:px-8">
+                    <svg viewBox="0 0 1000 180" className="w-full max-h-[30vh] overflow-visible">
+                        <text
+                            x="50%"
+                            y="130%"
+                            dominantBaseline="ideographic"
+                            textAnchor="middle"
+                            className={cn("fill-[#F0F0F0] font-black tracking-tighter uppercase", syne.className)}
+                            style={{ fontSize: '154px' }}
+                        >
+                            {title}
+                        </text>
+                    </svg>
+                </div>
             </div>
 
-            {/* Silk Animation Background */}
-            <SilkBackground />
+            <div className="absolute inset-0 overflow-hidden z-0">
+                {/* Silk Animation Background */}
+                <SilkBackground />
 
-            {/* Background Noise/Texture */}
-            <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150"></div>
-
-            {/* Scroll Indicator */}
-            <div className="hero-scroll absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20 mix-blend-difference pointer-events-none">
-                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-white opacity-50">
-                    Scroll
-                </span>
-                <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
-                    <div className="scroll-line-inner absolute top-0 left-0 w-full h-full bg-white" />
-                </div>
+                {/* Background Noise/Texture */}
+                <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150"></div>
             </div>
         </section>
     );

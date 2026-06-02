@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,6 +12,24 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Footer() {
     const containerRef = useRef<HTMLDivElement>(null);
     const textRef = useRef<HTMLHeadingElement>(null);
+    const [time, setTime] = useState<string>('');
+
+    useEffect(() => {
+        const updateTime = () => {
+            const now = new Date();
+            const istTime = now.toLocaleTimeString('en-US', {
+                timeZone: 'Asia/Kolkata',
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            });
+            setTime(istTime);
+        };
+        updateTime();
+        const interval = setInterval(updateTime, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     useGSAP(() => {
         // Subtle Parallax on the massive text
@@ -38,7 +56,7 @@ export default function Footer() {
                 start: 'top 80%',
             }
         });
-        
+
         // Subtle divider scale reveal
         gsap.from('.footer-divider', {
             scaleX: 0,
@@ -58,9 +76,9 @@ export default function Footer() {
     };
 
     return (
-        <footer 
-            ref={containerRef} 
-            className="relative w-full h-screen min-h-[600px] bg-[#030303] text-white overflow-hidden flex flex-col justify-between pt-12 pb-12 z-50 border-t border-white/[0.02]"
+        <footer
+            ref={containerRef}
+            className="relative w-full h-screen min-h-[600px] bg-[#030303] text-white overflow-hidden flex flex-col justify-between pt-16 pb-16 z-50 border-t border-white/[0.02]"
         >
             {/* Background Effects */}
             <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -71,23 +89,26 @@ export default function Footer() {
             </div>
 
             {/* Top Area */}
-            <div className="footer-fade-up w-full flex justify-between items-center px-6 md:px-12 z-20 font-mono uppercase text-[10px] tracking-[0.2em] text-neutral-500">
-                <span className="text-white opacity-80">PRDX // STUDIO</span>
-                <button onClick={handleBackToTop} className="hover:text-white transition-colors duration-500 flex items-center gap-3 group cursor-pointer">
+            <div className="footer-fade-up w-full flex justify-between items-center px-page z-20 text-micro text-neutral-500">
+                <div className="flex flex-col gap-1">
+                    <span className="text-white opacity-80">12.9629° N, 77.5775° E</span>
+                    {time && <span className="text-red-600 font-mono text-xs">{time}</span>}
+                </div>
+                <button onClick={handleBackToTop} className="hover:text-white transition-colors duration-500 flex items-center gap-sm group cursor-pointer">
                     BACK TO TOP
-                    <span className="w-1 h-1 bg-neutral-600 group-hover:bg-white rounded-full transition-colors" />
+                    <span className="w-1.5 h-1.5 bg-neutral-600 group-hover:bg-white rounded-full transition-colors" />
                 </button>
             </div>
 
             {/* Thin Divider Lines Top */}
-            <div className="footer-divider absolute top-28 left-6 right-6 h-[1px] bg-white/[0.03] z-10" />
+            <div className="footer-divider absolute top-28 left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 h-[1px] bg-white/[0.03] z-10" />
 
             {/* Oversized Background Typography */}
             <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0 overflow-hidden">
-                <h2 
+                <h2
                     ref={textRef}
                     className={cn(
-                        "text-[12vw] leading-[0.75] font-black uppercase tracking-tighter text-[#1f1f1f] whitespace-nowrap select-none", 
+                        "text-[12vw] leading-[0.75] font-black uppercase tracking-tighter text-[#1f1f1f] whitespace-nowrap select-none",
                         syne.className
                     )}
                     style={{ fontWeight: 900 }}
@@ -96,48 +117,39 @@ export default function Footer() {
                 </h2>
             </div>
 
-            {/* Center Area (Available for projects) */}
-            <div className="footer-fade-up absolute top-36 md:top-40 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
-                <div className="flex items-center gap-4 font-mono text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-neutral-400 bg-[#0A0A0A]/50 px-6 py-3 rounded-full border border-white/[0.04] backdrop-blur-md hover:bg-white/[0.03] hover:text-white transition-all duration-700 cursor-default">
-                    <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-50"></span>
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
-                    </span>
-                    AVAILABLE FOR PROJECTS
-                </div>
-            </div>
+
 
             {/* Thin Divider Lines Bottom */}
-            <div className="footer-divider absolute bottom-[140px] md:bottom-[120px] left-6 right-6 h-[1px] bg-white/[0.03] z-10" />
+            <div className="footer-divider absolute bottom-[140px] md:bottom-[120px] left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 h-[1px] bg-white/[0.03] z-10" />
 
             {/* Bottom Area */}
-            <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end px-6 md:px-12 z-20 gap-12 md:gap-0 font-mono text-[10px] tracking-[0.2em] text-neutral-500 uppercase mt-auto">
-                
+            <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end px-page z-20 gap-lg md:gap-0 text-micro text-neutral-500 mt-auto">
+
                 {/* Left: Copyright & Identity */}
-                <div className="footer-fade-up flex flex-col gap-4 w-full md:w-auto">
+                <div className="footer-fade-up flex flex-col gap-sm w-full md:w-auto">
                     <p className="text-white opacity-90">© {new Date().getFullYear()} PARADOX.</p>
-                    <p className="text-neutral-600 max-w-[200px] leading-relaxed">Visual direction &<br />interaction design</p>
+                    <p className="text-red-600 max-w-[200px] leading-relaxed">Built with intention,<br />Designed for impact.</p>
                 </div>
-                
+
                 {/* Right: Social & Contact */}
-                <div className="flex flex-col md:flex-row gap-12 md:gap-24 w-full md:w-auto justify-start md:justify-end">
-                    <div className="footer-fade-up flex flex-col gap-5">
-                        <span className="text-neutral-700 font-bold">SOCIAL</span>
-                        <div className="flex flex-col gap-4">
-                            <a href="https://www.instagram.com/paradox.x0/" target="_blank" rel="noopener noreferrer" className="relative w-fit text-neutral-400 hover:text-white transition-colors duration-500 group">
+                <div className="flex flex-col md:flex-row gap-lg md:gap-xxl w-full md:w-auto justify-start md:justify-end">
+                    <div className="footer-fade-up flex flex-col gap-sm">
+                        <span className="text-neutral-700 font-bold text-[9px] tracking-widest">SOCIAL</span>
+                        <div className="flex flex-col gap-xs items-start">
+                            <a href="https://www.instagram.com/paradox.x0/" target="_blank" rel="noopener noreferrer" className="relative inline-block w-fit text-neutral-400 hover:text-white transition-colors duration-500 group">
                                 Instagram
                                 <span className="absolute -bottom-1.5 left-0 w-0 h-[1px] bg-white transition-all duration-500 ease-out group-hover:w-full"></span>
                             </a>
-                            <a href="https://x.com/somesh__x1" target="_blank" rel="noopener noreferrer" className="relative w-fit text-neutral-400 hover:text-white transition-colors duration-500 group">
+                            <a href="https://x.com/somesh__x1" target="_blank" rel="noopener noreferrer" className="relative inline-block w-fit text-neutral-400 hover:text-white transition-colors duration-500 group">
                                 X (Twitter)
                                 <span className="absolute -bottom-1.5 left-0 w-0 h-[1px] bg-white transition-all duration-500 ease-out group-hover:w-full"></span>
                             </a>
                         </div>
                     </div>
 
-                    <div className="footer-fade-up flex flex-col gap-5">
-                        <span className="text-neutral-700 font-bold">CONTACT</span>
-                        <a href="mailto:someshwark22@gmail.com" className="relative w-fit text-neutral-400 hover:text-white transition-colors duration-500 group lowercase">
+                    <div className="footer-fade-up flex flex-col gap-sm items-start">
+                        <span className="text-neutral-700 font-bold text-[9px] tracking-widest">CONTACT</span>
+                        <a href="mailto:someshwark22@gmail.com" className="relative inline-block w-fit text-neutral-400 hover:text-white transition-colors duration-500 group lowercase">
                             someshwark22@gmail.com
                             <span className="absolute -bottom-1.5 left-0 w-0 h-[1px] bg-white transition-all duration-500 ease-out group-hover:w-full"></span>
                         </a>

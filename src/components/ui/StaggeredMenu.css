@@ -26,9 +26,24 @@
   justify-content: space-between;
   padding: 1.125em 1.5em; /* Match original header padding roughly px-6 py-[18px] */
   background: transparent;
+  border-bottom: 1px solid transparent;
   pointer-events: none;
   z-index: 60;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    backdrop-filter 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.staggered-menu-wrapper.scrolled .staggered-menu-header {
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+  padding: 0.875em 1.5em;
 }
 
 .staggered-menu-wrapper.nav-hidden:not([data-open="true"]) .staggered-menu-header {
@@ -206,8 +221,11 @@
 
 .sm-socials-title {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 500;
+  font-family: var(--font-space), monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
   color: var(--sm-accent, #dc2626);
 }
 
@@ -218,7 +236,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
 }
 
@@ -248,20 +266,23 @@
 }
 
 .sm-socials-link {
-  font-size: 1.2rem;
+  font-family: var(--font-space), monospace;
+  font-size: 0.8rem;
   font-weight: 500;
-  color: #fff;
+  color: #a3a3a3;
   text-decoration: none;
   position: relative;
   padding: 2px 0;
   display: inline-block;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   transition:
     color 0.3s ease,
     opacity 0.3s ease;
 }
 
 .sm-socials-link:hover {
-  color: var(--sm-accent, #dc2626);
+  color: #fff;
 }
 
 .sm-panel-title {
@@ -284,18 +305,19 @@
 .sm-panel-item {
   position: relative;
   color: #fff;
-  font-weight: 600;
-  font-size: 3.5rem;
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
   cursor: pointer;
-  line-height: 1;
-  letter-spacing: -2px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
   transition:
     background 0.25s,
     color 0.25s;
   display: inline-block;
   text-decoration: none;
-  padding-right: 1.4em;
+  padding-right: 0.5em;
 }
 
 .staggered-menu-panel .sm-socials-list .sm-socials-link {
@@ -334,12 +356,13 @@
   counter-increment: smItem;
   content: counter(smItem, decimal-leading-zero);
   position: absolute;
-  top: 0.1em;
-  right: 2.8em;
-  font-size: 18px;
-  font-weight: 400;
+  top: 0.25em;
+  right: 0;
+  font-family: var(--font-space), monospace;
+  font-size: clamp(0.75rem, 1vw, 0.875rem);
+  font-weight: 500;
   color: var(--sm-accent, #dc2626);
-  letter-spacing: 0;
+  letter-spacing: 0.05em;
   pointer-events: none;
   user-select: none;
   opacity: var(--sm-num-opacity, 0);

@@ -165,8 +165,8 @@ export default function BoxBusterGame() {
     const elapsed = GAME_DURATION - (phaseRef.current === 'playing' ? 0 : GAME_DURATION);
     const progress = 1 - (elapsed / GAME_DURATION);
 
-    // Consistent size throughout the game (60px to 80px)
-    const size = 60 + Math.random() * 20;
+    // Strictly consistent size across the whole game
+    const size = 72;
 
     const roll = Math.random();
     const type: Box['type'] = roll < 0.08 ? 'gold' : roll < 0.15 ? 'cursed' : 'normal';
@@ -175,17 +175,46 @@ export default function BoxBusterGame() {
     const lifetime = Math.max(1000, 2400 - progress * 1400);
 
     const id = boxIdRef.current++;
-    const box: Box = {
-      id,
-      x: Math.random() * (width - size),
-      y: Math.random() * (height - size),
-      size,
-      type,
-      spawnedAt: Date.now(),
-      lifetime,
-    };
 
-    setBoxes(prev => [...prev, box]);
+    setBoxes(prev => {
+      let x = 0;
+      let y = 0;
+      let attempts = 0;
+      let overlap = true;
+
+      // Try finding a non-overlapping position
+      while (overlap && attempts < 20) {
+        x = Math.random() * (width - size);
+        y = Math.random() * (height - size);
+        overlap = false;
+
+        for (const b of prev) {
+          const padding = 10;
+          if (
+            x < b.x + b.size + padding &&
+            x + size + padding > b.x &&
+            y < b.y + b.size + padding &&
+            y + size + padding > b.y
+          ) {
+            overlap = true;
+            break;
+          }
+        }
+        attempts++;
+      }
+
+      const box: Box = {
+        id,
+        x,
+        y,
+        size,
+        type,
+        spawnedAt: Date.now(),
+        lifetime,
+      };
+
+      return [...prev, box];
+    });
 
     // Auto-remove after lifetime + penalize
     setTimeout(() => {
@@ -373,10 +402,10 @@ export default function BoxBusterGame() {
 
   // ─── Render ──────────────────────────────────────────────────────────────
   return (
-    <div className="w-full flex flex-col items-center gap-6" data-hide-cursor={phase === 'playing' ? "true" : undefined}>
+    <div className="w-full h-full flex flex-col items-center gap-4" data-hide-cursor={phase === 'playing' ? "true" : undefined}>
 
       {/* ── HUD ─────────────────────────────────────────────────────────── */}
-      <div className="w-full max-w-4xl flex items-center justify-between px-1 font-mono text-xs text-neutral-500 uppercase tracking-widest">
+      <div className="w-full max-w-4xl flex items-center justify-between px-1 font-sans text-xs text-neutral-500 uppercase tracking-widest shrink-0">
         <span>All-Time High: <span className="text-yellow-400 font-bold">{highScore}</span></span>
         <span>Session: <span className="text-white font-bold">{score}</span></span>
       </div>
@@ -385,25 +414,24 @@ export default function BoxBusterGame() {
       <div
         ref={arenaRef}
         id="game-arena"
-        className="relative w-full max-w-4xl overflow-hidden select-none"
+        className="relative w-full max-w-4xl flex-1 min-h-[300px] overflow-hidden select-none rounded-xl"
         style={{
-          height: '520px',
           background: 'linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%)',
           border: '1px solid rgba(255,255,255,0.08)',
           boxShadow: '0 0 60px rgba(220,38,38,0.05) inset',
         }}
       >
         {/* Screen flash */}
-        {screenFlash && (
-          <div
-            className="absolute inset-0 z-50 pointer-events-none"
-            style={{
-              background: screenFlash === 'green'
-                ? 'rgba(34,197,94,0.06)'
-                : 'rgba(220,38,38,0.1)',
-            }}
-          />
-        )}
+        <div
+          className="absolute inset-0 z-50 pointer-events-none transition-colors duration-100"
+          style={{
+            background: screenFlash === 'green'
+              ? 'rgba(34,197,94,0.06)'
+              : screenFlash === 'red'
+              ? 'rgba(220,38,38,0.1)'
+              : 'transparent',
+          }}
+        />
 
         {/* Grid overlay */}
         <div
@@ -419,10 +447,7 @@ export default function BoxBusterGame() {
         {phase === 'idle' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-8 z-10">
             <div className="text-center flex flex-col items-center">
-              <p className="font-mono text-neutral-500 text-sm max-w-sm text-center leading-relaxed">
-                Click boxes before they vanish. 30 seconds. Beat your record.
-              </p>
-              <div className="mt-6 flex gap-6 justify-center font-mono text-xs text-neutral-600">
+              <div className="mt-6 flex gap-6 justify-center font-sans text-xs text-neutral-600">
                 <span><span className="text-white">■</span> Normal = +1</span>
                 <span><span className="text-yellow-400">■</span> Gold = +3</span>
                 <span><span className="text-purple-500">■</span> Cursed = -3</span>
@@ -433,14 +458,14 @@ export default function BoxBusterGame() {
             <button
               id="start-game-btn"
               onClick={startGame}
-              className="group relative px-12 py-4 bg-red-600 text-white font-mono text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-200"
+              className="group relative px-12 py-4 bg-red-600 text-white font-sans text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-200"
               style={{ clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))' }}
             >
               START SESSION
             </button>
 
             {history.length > 0 && (
-              <div className="font-mono text-xs text-neutral-600 border border-white/5 px-6 py-4 w-72">
+              <div className="font-sans text-xs text-neutral-600 border border-white/5 px-6 py-4 w-72">
                 <p className="text-neutral-400 mb-3 tracking-widest">RECENT SESSIONS</p>
                 {history.map((h, i) => (
                   <div key={i} className="flex justify-between py-1 border-b border-white/5">
@@ -474,7 +499,7 @@ export default function BoxBusterGame() {
         {phase === 'playing' && (
           <>
             {/* Live stats */}
-            <div className="absolute top-4 left-4 z-10 font-mono text-xs text-neutral-500 flex flex-col gap-1">
+            <div className="absolute top-4 left-4 z-10 font-sans text-xs text-neutral-500 flex flex-col gap-1">
               {combo >= 2 && (
                 <span
                   className="text-orange-400 font-bold"
@@ -484,7 +509,7 @@ export default function BoxBusterGame() {
                 </span>
               )}
             </div>
-            <div className="absolute top-4 right-4 z-10 font-mono text-2xl font-bold text-white">
+            <div className={cn("absolute top-4 right-4 z-10 text-4xl font-bold text-white", syne.className)}>
               {score}
             </div>
 
@@ -544,7 +569,7 @@ export default function BoxBusterGame() {
             {floats.map(f => (
               <div
                 key={f.id}
-                className="absolute pointer-events-none font-mono font-bold text-sm"
+                className="absolute pointer-events-none font-sans font-bold text-sm"
                 style={{
                   left: f.x,
                   top: f.y,
@@ -562,7 +587,7 @@ export default function BoxBusterGame() {
         {/* ── RESULT ───────────────────────────────────────────────────── */}
         {phase === 'result' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-10">
-            <p className="font-mono text-red-600 text-xs tracking-widest uppercase">
+            <p className="font-sans text-red-600 text-xs tracking-widest uppercase">
               // SESSION OVER //
             </p>
             <h2
@@ -570,16 +595,16 @@ export default function BoxBusterGame() {
               style={{ fontWeight: 800 }}
             >
               {score}
-              <span className="text-neutral-600 text-2xl ml-2 font-mono">pts</span>
+              <span className="text-neutral-600 text-2xl ml-2 font-sans">pts</span>
             </h2>
 
             {score >= highScore && score > 0 && (
-              <p className="font-mono text-yellow-400 text-sm tracking-widest animate-pulse">
+              <p className="font-sans text-yellow-400 text-sm tracking-widest animate-pulse">
                 ★ NEW HIGH SCORE ★
               </p>
             )}
 
-            <div className="flex gap-8 font-mono text-xs text-neutral-500">
+            <div className="flex gap-8 font-sans text-xs text-neutral-500">
               <div className="text-center">
                 <p className="text-neutral-600">MAX COMBO</p>
                 <p className="text-white text-2xl font-bold">x{maxCombo}</p>
@@ -594,7 +619,7 @@ export default function BoxBusterGame() {
               <button
                 id="play-again-btn"
                 onClick={startGame}
-                className="px-10 py-3 bg-red-600 text-white font-mono text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-200"
+                className="px-10 py-3 bg-red-600 text-white font-sans text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-200"
                 style={{ clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))' }}
               >
                 PLAY AGAIN
@@ -602,7 +627,7 @@ export default function BoxBusterGame() {
               <button
                 id="back-idle-btn"
                 onClick={() => setPhase('idle')}
-                className="px-10 py-3 border border-white/20 text-white font-mono text-sm uppercase tracking-widest hover:border-white/60 transition-all duration-200"
+                className="px-10 py-3 border border-white/20 text-white font-sans text-sm uppercase tracking-widest hover:border-white/60 transition-all duration-200"
               >
                 SCORES
               </button>
@@ -623,7 +648,7 @@ export default function BoxBusterGame() {
         {/* Timer pill */}
         {phase === 'playing' && (
           <div
-            className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-xs tabular-nums"
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 font-sans text-sm tracking-widest font-bold tabular-nums"
             style={{ color: timerColor }}
           >
             {String(timeLeft).padStart(2, '0')}s

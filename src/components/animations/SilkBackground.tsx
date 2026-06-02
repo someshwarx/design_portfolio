@@ -90,7 +90,7 @@ export default function SilkBackground() {
                 const y = height / 2 + (i - linesCount / 2) * 15;
 
                 // Draw points across width
-                for (let x = 0; x <= width; x += 35) {
+                for (let x = 0; x <= width + 35; x += 35) {
                     // Sine wave combinations
                     // 1. Slow large wave
                     const y1 = Math.sin(x * 0.002 + t + i * 0.05) * 100;

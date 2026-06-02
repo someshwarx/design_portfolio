@@ -13,6 +13,19 @@ export const PROJECTS_QUERY = defineQuery(`*[_type == "project"] | order(publish
   publishedAt
 }`);
 
+export const FEATURED_PROJECTS_QUERY = defineQuery(`*[_type == "project"] | order(publishedAt desc) [0...4] {
+  _id,
+  title,
+  slug,
+  category,
+  "imageUrl": mainImage.asset->url,
+  "dimensions": mainImage.asset->metadata.dimensions,
+  mainImage,
+  hexColor,
+  size,
+  publishedAt
+}`);
+
 export const PROJECT_QUERY = defineQuery(`*[_type == "project" && slug.current == $slug][0]{
   _id,
   title,

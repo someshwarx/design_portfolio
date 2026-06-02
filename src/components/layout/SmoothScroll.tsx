@@ -4,6 +4,7 @@ import { ReactLenis } from 'lenis/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 // Only register GSAP on the client
 if (typeof window !== 'undefined') {
@@ -12,6 +13,13 @@ if (typeof window !== 'undefined') {
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
     const lenisRef = useRef<any>(null);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        if (lenisRef.current?.lenis) {
+            lenisRef.current.lenis.scrollTo(0, { immediate: true });
+        }
+    }, [pathname]);
 
     useEffect(() => {
         // Sync GSAP ScrollTrigger with Lenis

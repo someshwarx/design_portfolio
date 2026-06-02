@@ -21,8 +21,8 @@ export default function Header() {
 
     const logoNode = (
         <Link href="/" className="z-50 pointer-events-auto">
-            <h1 className="text-xl md:text-2xl font-bold uppercase tracking-tighter hover:text-red-600 transition-colors font-mono text-white">
-                PDOX
+            <h1 className="text-lg md:text-xl font-bold uppercase tracking-[0.15em] hover:text-red-600 transition-colors font-mono text-white">
+                PRDX
             </h1>
         </Link>
     );

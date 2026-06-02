@@ -6,8 +6,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
     const [progress, setProgress] = useState(0);
+    const [isFirstVisit, setIsFirstVisit] = useState(true);
 
     useEffect(() => {
+        const hasVisited = sessionStorage.getItem('portfolio_visited');
+        if (hasVisited) {
+            setIsFirstVisit(false);
+            setIsLoading(false);
+            return;
+        }
+
+        sessionStorage.setItem('portfolio_visited', 'true');
+
         // Disable scroll during loading
         document.body.style.overflow = 'hidden';
 
@@ -28,7 +38,7 @@ export default function Preloader() {
     }, []);
 
     useEffect(() => {
-        if (progress === 100) {
+        if (progress === 100 && isFirstVisit) {
             // Delay exit to show 100% briefly
             const timer = setTimeout(() => {
                 setIsLoading(false);
@@ -36,12 +46,15 @@ export default function Preloader() {
             }, 500);
             return () => clearTimeout(timer);
         }
-    }, [progress]);
+    }, [progress, isFirstVisit]);
+
+    if (!isFirstVisit) return null;
 
     return (
         <AnimatePresence mode="wait">
             {isLoading && (
                 <motion.div
+                    id="preloader"
                     className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white"
                     exit={{
                         y: '-100%',

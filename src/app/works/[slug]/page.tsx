@@ -25,8 +25,8 @@ export default async function ProjectPage({ params }: PageProps) {
     return (
         <main className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white">
             {/* Back to Index */}
-            <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center mix-blend-difference pointer-events-none">
-                <Link href="/" className="pointer-events-auto group flex items-center gap-2 text-sm uppercase tracking-widest hover:text-red-500 transition-colors">
+            <nav className="fixed top-0 left-0 w-full z-50 px-page py-6 md:py-8 flex justify-between items-center mix-blend-difference pointer-events-none">
+                <Link href="/" className="pointer-events-auto group flex items-center gap-xs text-sm uppercase tracking-widest hover:text-red-500 transition-colors">
                     <span className="group-hover:-translate-x-1 transition-transform duration-300">←</span>
                     Index
                 </Link>
@@ -34,7 +34,7 @@ export default async function ProjectPage({ params }: PageProps) {
             </nav>
 
             {/* Hero Section */}
-            <header className="relative w-full h-[60vh] md:h-[80vh] flex items-end pb-12 md:pb-24 px-6 md:px-12">
+            <header className="relative w-full h-[60vh] md:h-[80vh] flex items-end pb-16 md:pb-28 px-page">
                 <div className="absolute inset-0 z-0">
                     {imageUrl && (
                         <Image
@@ -48,23 +48,23 @@ export default async function ProjectPage({ params }: PageProps) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                 </div>
 
-                <div className="relative z-10 max-w-7xl w-full">
-                    <h1 className={cn("text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.9] tracking-tighter text-white break-words", syne.className)}>
+                <div className="relative z-10 max-w-7xl w-full mx-auto">
+                    <h1 className={cn("text-h1 text-white break-words", syne.className)}>
                         {project.title}
                     </h1>
-                    <div className="mt-6 flex flex-col md:flex-row gap-8 md:items-end justify-between border-t border-white/20 pt-6">
+                    <div className="mt-md flex flex-col md:flex-row gap-lg md:items-end justify-between border-t border-white/20 pt-md">
                         <div className="max-w-xl">
-                            <p className="text-base sm:text-lg md:text-xl text-neutral-300 font-light font-mono leading-relaxed">
+                            <p className="text-body-large text-neutral-300 leading-relaxed">
                                 {project.description || "No description provided."}
                             </p>
                         </div>
-                        <div className="flex gap-8 sm:gap-12 font-mono text-[10px] sm:text-xs md:text-sm text-neutral-500 uppercase tracking-widest mt-4 md:mt-0">
+                        <div className="flex gap-md sm:gap-lg font-mono text-micro text-neutral-500 uppercase mt-sm md:mt-0">
                             <div>
-                                <span className="block text-white mb-1">Date</span>
+                                <span className="block text-white opacity-40 font-bold mb-1">Date</span>
                                 {project.publishedAt ? new Date(project.publishedAt).getFullYear() : '2026'}
                             </div>
                             <div>
-                                <span className="block text-white mb-1">Role</span>
+                                <span className="block text-white opacity-40 font-bold mb-1">Role</span>
                                 Visual Design
                             </div>
                         </div>
@@ -73,19 +73,19 @@ export default async function ProjectPage({ params }: PageProps) {
             </header>
 
             {/* Content Spacer / Future Rich Text */}
-            <section className="px-6 md:px-12 py-24 max-w-7xl mx-auto">
+            <section className="px-page py-section-breath max-w-7xl mx-auto">
                 {/* Placeholder for now since we only have single image and description */}
                 <div className="w-full aspect-video bg-neutral-900 border border-white/10 flex items-center justify-center">
-                    <p className="font-mono text-neutral-600 uppercase tracking-widest">More content coming soon</p>
+                    <p className="font-mono text-neutral-600 uppercase tracking-widest text-micro">More content coming soon</p>
                 </div>
             </section>
 
             {/* Footer mimic */}
-            <footer className="w-full py-20 border-t border-white/10 flex flex-col items-center justify-center text-center overflow-hidden">
-                <h2 className={cn("text-[12vw] font-bold text-neutral-900 leading-none select-none pointer-events-none tracking-tighter whitespace-nowrap text-center", syne.className)}>
+            <footer className="w-full py-section-breath border-t border-white/10 flex flex-col items-center justify-center text-center overflow-hidden px-page">
+                <h2 className={cn("text-display text-neutral-900 leading-none select-none pointer-events-none whitespace-nowrap text-center", syne.className)}>
                     PARADOX
                 </h2>
-                <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-6xl px-8 mt-12 gap-8 md:gap-0 text-neutral-500 font-mono text-xs md:text-sm">
+                <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-7xl mt-lg gap-md md:gap-0 text-neutral-500 font-mono text-micro border-t border-white/[0.03] pt-md">
                     <p>SEOUL / NEW YORK</p>
                     <p>© 2026 PARADOX STUDIO. ALL RIGHTS RESERVED.</p>
                 </div>

@@ -9,15 +9,15 @@ export const metadata = {
     title: "Designs // Paradox",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function DesignsPage() {
     const projects = await client.fetch<Project[]>(PROJECTS_QUERY);
 
     return (
-        <main className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white pb-20 relative overflow-hidden flex flex-col">
+        <main className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white pb-xl relative overflow-hidden flex flex-col">
             <Header />
-            <div className="pt-24 md:pt-32">
+            <div className="pt-32 md:pt-40">
                 <WorksGrid projects={projects} />
             </div>
         </main>
