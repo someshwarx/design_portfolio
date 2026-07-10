@@ -17,7 +17,7 @@ export default function LabPage() {
             {/* Grain */}
             <div className="absolute inset-0 z-0 opacity-30 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-[200]" />
 
-            <section className="relative z-10 flex-1 px-4 md:px-10 flex flex-col items-center pt-24 pb-6 overflow-hidden">
+            <section className="relative z-10 flex-1 px-4 md:px-10 flex flex-col items-center pt-20 md:pt-24 pb-4 md:pb-6 overflow-hidden">
 
                 {/* Page header */}
                 <div className="w-full max-w-4xl mb-6 flex flex-col items-center text-center shrink-0">

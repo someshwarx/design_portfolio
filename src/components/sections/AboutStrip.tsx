@@ -46,7 +46,7 @@ export default function AboutStrip() {
             <div className="about-strip-divider w-full h-[1px] bg-white/[0.06] mb-16 md:mb-24" />
 
             {/* Content Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-lg md:gap-xl">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-md md:gap-xl">
                 {/* Left — Identity */}
                 <div className="about-strip-fade md:col-span-5 flex flex-col gap-md">
                     <span className="text-accent-label font-mono text-xl md:text-2xl">// WHO AM I</span>

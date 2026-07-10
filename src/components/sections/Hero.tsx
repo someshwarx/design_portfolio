@@ -43,7 +43,7 @@ export default function Hero({
         <section
             ref={containerRef}
             className={cn(
-                "relative flex h-[100dvh] w-full flex-col justify-end items-center overflow-x-clip pb-8 md:pb-12",
+                "relative flex h-[100dvh] w-full flex-col justify-end items-center overflow-x-clip pb-6 sm:pb-8 md:pb-12",
                 className
             )}
         >

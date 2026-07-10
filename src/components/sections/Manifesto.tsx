@@ -82,7 +82,7 @@ export default function Manifesto() {
                         <h2
                             className={cn(
                                 'font-black uppercase tracking-tighter leading-[0.88]',
-                                'text-[11vw] md:text-[10vw] lg:text-[9vw]',
+                                'text-[clamp(2.5rem,11vw,8rem)] md:text-[clamp(3rem,10vw,10rem)] lg:text-[clamp(4rem,9vw,12rem)]',
                                 line.accent ? 'text-red-600' : 'text-[#F0F0F0]',
                                 syne.className
                             )}

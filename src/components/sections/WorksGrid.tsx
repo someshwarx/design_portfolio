@@ -110,8 +110,8 @@ export default function WorksGrid({ projects = [] }: WorksGridProps) {
         <section ref={containerRef} className="w-full py-section-breath px-page bg-background relative">
             {/* Section Header */}
             <div ref={titleRef} className="flex flex-col items-center justify-center mb-16 md:mb-20 gap-sm">
-                <div className="overflow-visible w-full flex justify-center">
-                    <h2 className={cn("text-[clamp(5rem,10vw,25rem)] font-black leading-[0.85] tracking-tighter text-[#F0F0F0] whitespace-nowrap text-center", syne.className)}>
+                <div className="overflow-hidden w-full flex justify-center">
+                    <h2 className={cn("text-[clamp(3.5rem,10vw,25rem)] font-black leading-[0.85] tracking-tighter text-[#F0F0F0] whitespace-nowrap text-center", syne.className)}>
                         WORKS
                     </h2>
                 </div>
@@ -144,7 +144,7 @@ export default function WorksGrid({ projects = [] }: WorksGridProps) {
                                 transition={smoothTransition}
                             >
                                 {/* Bottom Right Title (Hover/Mobile Visible) */}
-                                <motion.div className="absolute bottom-xxs right-xxs md:bottom-sm md:right-sm z-20 md:translate-y-8 md:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out translate-y-0 opacity-100">
+                                <motion.div className="absolute bottom-2 right-2 md:bottom-sm md:right-sm z-20 md:translate-y-8 md:opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out translate-y-0 opacity-100">
                                     <span className="text-micro font-mono bg-black/85 px-2.5 py-1 border border-white/10 text-white/80 uppercase tracking-widest">
                                         {project.title}
                                     </span>

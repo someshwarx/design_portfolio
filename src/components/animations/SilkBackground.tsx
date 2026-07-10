@@ -7,9 +7,9 @@ export default function SilkBackground() {
 
     // Store state outside the render loop but inside the component instance
     // currentOpacity: 0 = white, 1 = fully red
-    const linesCount = 25;
-    const lineOpacities = useRef<number[]>(new Array(linesCount).fill(0));
-    const targetOpacities = useRef<number[]>(new Array(linesCount).fill(0));
+    const baseLinesCount = 25;
+    const lineOpacities = useRef<number[]>(new Array(baseLinesCount).fill(0));
+    const targetOpacities = useRef<number[]>(new Array(baseLinesCount).fill(0));
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -20,6 +20,17 @@ export default function SilkBackground() {
 
         let width = window.innerWidth;
         let height = window.innerHeight;
+
+        // Mobile performance: fewer lines + coarser point spacing
+        const isMobile = width < 768;
+        const linesCount = isMobile ? 15 : baseLinesCount;
+        const pointSpacing = isMobile ? 50 : 35;
+
+        // Resize opacity arrays if needed
+        if (lineOpacities.current.length !== linesCount) {
+            lineOpacities.current = new Array(linesCount).fill(0);
+            targetOpacities.current = new Array(linesCount).fill(0);
+        }
 
         let t = 0;
         let animationFrameId: number;
@@ -90,7 +101,7 @@ export default function SilkBackground() {
                 const y = height / 2 + (i - linesCount / 2) * 15;
 
                 // Draw points across width
-                for (let x = 0; x <= width + 35; x += 35) {
+                for (let x = 0; x <= width + pointSpacing; x += pointSpacing) {
                     // Sine wave combinations
                     // 1. Slow large wave
                     const y1 = Math.sin(x * 0.002 + t + i * 0.05) * 100;

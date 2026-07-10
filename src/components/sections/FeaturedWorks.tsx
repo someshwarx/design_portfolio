@@ -123,7 +123,7 @@ export default function FeaturedWorks() {
                             <div className="absolute inset-0 bg-white/[0.015] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             {/* ---- Card Inner ---- */}
-                            <div className="relative z-10 flex flex-col min-h-[320px] md:min-h-[400px]">
+                            <div className="relative z-10 flex flex-col min-h-[280px] sm:min-h-[320px] md:min-h-[400px]">
 
                                 {/* Top Bar — metadata row */}
                                 <div className="flex items-center justify-between px-6 md:px-8 py-4 border-b border-white/[0.04]">

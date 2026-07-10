@@ -163,8 +163,9 @@
   -webkit-backdrop-filter: blur(24px);
   display: flex;
   flex-direction: column;
-  padding: 8em 3em 3em 3em;
+  padding: 5.5rem 1.5rem 2rem 1.5rem;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   z-index: 10;
   pointer-events: auto;
   opacity: 0;
@@ -368,6 +369,12 @@
   opacity: var(--sm-num-opacity, 0);
 }
 
+@media (min-width: 768px) {
+  .staggered-menu-panel {
+    padding: 8em 3em 3em 3em;
+  }
+}
+
 @media (max-width: 1024px) {
   .staggered-menu-panel, .sm-prelayers {
     width: 100%;
@@ -381,5 +388,27 @@
     width: 100%;
     left: 0;
     right: 0;
+  }
+
+  .sm-panel-item {
+    padding-right: 2.5em;
+  }
+
+  .staggered-menu-header {
+    padding: 0.875em 1rem;
+  }
+
+  .staggered-menu-wrapper.scrolled .staggered-menu-header {
+    padding: 0.75em 1rem;
+  }
+}
+
+@media (max-width: 374px) {
+  .staggered-menu-panel {
+    padding: 5rem 1rem 1.5rem 1rem;
+  }
+
+  .sm-panel-item {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
   }
 }

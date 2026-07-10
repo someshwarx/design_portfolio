@@ -103,6 +103,13 @@
   --container-padding-desktop: 4rem;  /* 64px */
 }
 
+/* Tiny screen overrides (< 375px, e.g. iPhone SE) */
+@media (max-width: 374px) {
+  :root {
+    --container-padding-mobile: 1rem; /* 16px — prevents content clipping on 320px screens */
+  }
+}
+
 /* Force dark theme everywhere */
 .dark {
   --background: oklch(0.02 0 0);
@@ -248,6 +255,10 @@
   @media (min-width: 1024px) {
     padding-left: var(--container-padding-desktop);
     padding-right: var(--container-padding-desktop);
+  }
+  @media (min-width: 1536px) {
+    padding-left: 6rem;
+    padding-right: 6rem;
   }
 }
 

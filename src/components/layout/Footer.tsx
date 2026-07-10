@@ -78,7 +78,7 @@ export default function Footer() {
     return (
         <footer
             ref={containerRef}
-            className="relative w-full h-screen min-h-[600px] bg-[#030303] text-white overflow-hidden flex flex-col justify-between pt-16 pb-16 z-50 border-t border-white/[0.02]"
+            className="relative w-full h-screen min-h-[500px] md:min-h-[600px] bg-[#030303] text-white overflow-hidden flex flex-col justify-between pt-12 md:pt-16 pb-12 md:pb-16 z-50 border-t border-white/[0.02]"
         >
             {/* Background Effects */}
             <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -89,19 +89,19 @@ export default function Footer() {
             </div>
 
             {/* Top Area */}
-            <div className="footer-fade-up w-full flex justify-between items-center px-page z-20 text-micro text-neutral-500">
+            <div className="footer-fade-up w-full flex flex-wrap justify-between items-center px-page z-20 text-micro text-neutral-500 gap-2">
                 <div className="flex flex-col gap-1">
                     <span className="text-white opacity-80">12.9629° N, 77.5775° E</span>
                     {time && <span className="text-red-600 font-mono text-xs">{time}</span>}
                 </div>
-                <button onClick={handleBackToTop} className="hover:text-white transition-colors duration-500 flex items-center gap-sm group cursor-pointer">
+                <button onClick={handleBackToTop} className="hover:text-white transition-colors duration-500 flex items-center gap-2 md:gap-sm group cursor-pointer">
                     BACK TO TOP
                     <span className="w-1.5 h-1.5 bg-neutral-600 group-hover:bg-white rounded-full transition-colors" />
                 </button>
             </div>
 
             {/* Thin Divider Lines Top */}
-            <div className="footer-divider absolute top-28 left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 h-[1px] bg-white/[0.03] z-10" />
+            <div className="footer-divider absolute top-24 md:top-28 left-4 md:left-12 lg:left-16 right-4 md:right-12 lg:right-16 h-[1px] bg-white/[0.03] z-10" />
 
             {/* Oversized Background Typography */}
             <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0 overflow-hidden">
@@ -120,10 +120,10 @@ export default function Footer() {
 
 
             {/* Thin Divider Lines Bottom */}
-            <div className="footer-divider absolute bottom-[140px] md:bottom-[120px] left-6 md:left-12 lg:left-16 right-6 md:right-12 lg:right-16 h-[1px] bg-white/[0.03] z-10" />
+            <div className="footer-divider absolute bottom-[120px] md:bottom-[120px] left-4 md:left-12 lg:left-16 right-4 md:right-12 lg:right-16 h-[1px] bg-white/[0.03] z-10" />
 
             {/* Bottom Area */}
-            <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end px-page z-20 gap-lg md:gap-0 text-micro text-neutral-500 mt-auto">
+            <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end px-page z-20 gap-md md:gap-0 text-micro text-neutral-500 mt-auto">
 
                 {/* Left: Copyright & Identity */}
                 <div className="footer-fade-up flex flex-col gap-sm w-full md:w-auto">

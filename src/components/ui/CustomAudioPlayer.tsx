@@ -57,7 +57,7 @@ export default function CustomAudioPlayer() {
                 transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="fixed bottom-6 left-6 z-[90] flex items-center gap-4 bg-[#050505]/95 backdrop-blur-md border-[0.5px] border-white/20 p-2 pr-6 shadow-2xl group transition-all min-w-[200px]"
+                className="fixed bottom-4 left-4 right-4 md:right-auto md:left-6 md:bottom-6 z-[90] flex items-center gap-3 md:gap-4 bg-[#050505]/95 backdrop-blur-md border-[0.5px] border-white/20 p-2 pr-4 md:pr-6 shadow-2xl group transition-all md:min-w-[200px] md:max-w-[320px]"
             >
                 {/* Hidden Audio Element */}
                 <audio 

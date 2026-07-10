@@ -73,7 +73,7 @@ export default function ContactCTA() {
 
                 {/* Main Heading */}
                 <div className="cta-heading overflow-hidden">
-                    <h2 className={cn('text-[#F0F0F0] font-black leading-[0.9] tracking-tighter uppercase text-[clamp(1rem,3vw,5vw)]', syne.className)}>
+                    <h2 className={cn('text-[#F0F0F0] font-black leading-[0.9] tracking-tighter uppercase text-[clamp(1.75rem,6vw,5rem)]', syne.className)}>
                         GOT A <span className="text-red-600">PROJECT?</span>
                     </h2>
                 </div>
@@ -86,7 +86,7 @@ export default function ContactCTA() {
                 {/* CTA Button */}
                 <a
                     href="mailto:someshwark22@gmail.com"
-                    className="cta-button group relative inline-flex items-center gap-3 border border-white/[0.1] px-10 py-5 mt-10 md:mt-14 text-micro text-neutral-300 hover:text-white transition-all duration-500 overflow-hidden rounded-full bg-[#0A0A0A]/80 backdrop-blur-md"
+                    className="cta-button group relative inline-flex items-center gap-3 border border-white/[0.1] px-8 py-4 md:px-10 md:py-5 mt-10 md:mt-14 text-micro text-neutral-300 hover:text-white transition-all duration-500 overflow-hidden rounded-full bg-[#0A0A0A]/80 backdrop-blur-md"
                 >
                     {/* Hover fill background */}
                     <span className="absolute inset-0 bg-red-600 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out rounded-full" />

@@ -165,8 +165,9 @@ export default function BoxBusterGame() {
     const elapsed = GAME_DURATION - (phaseRef.current === 'playing' ? 0 : GAME_DURATION);
     const progress = 1 - (elapsed / GAME_DURATION);
 
-    // Strictly consistent size across the whole game
-    const size = 72;
+    // Responsive size: smaller boxes on smaller screens
+    const arenaWidth = arenaRef.current.getBoundingClientRect().width;
+    const size = arenaWidth < 400 ? 56 : arenaWidth < 600 ? 64 : 72;
 
     const roll = Math.random();
     const type: Box['type'] = roll < 0.08 ? 'gold' : roll < 0.15 ? 'cursed' : 'normal';
@@ -405,7 +406,7 @@ export default function BoxBusterGame() {
     <div className="w-full h-full flex flex-col items-center gap-4" data-hide-cursor={phase === 'playing' ? "true" : undefined}>
 
       {/* ── HUD ─────────────────────────────────────────────────────────── */}
-      <div className="w-full max-w-4xl flex items-center justify-between px-1 font-sans text-xs text-neutral-500 uppercase tracking-widest shrink-0">
+      <div className="w-full max-w-4xl flex flex-wrap items-center justify-between px-1 font-sans text-[10px] sm:text-xs text-neutral-500 uppercase tracking-widest shrink-0 gap-1">
         <span>All-Time High: <span className="text-yellow-400 font-bold">{highScore}</span></span>
         <span>Session: <span className="text-white font-bold">{score}</span></span>
       </div>
@@ -447,7 +448,7 @@ export default function BoxBusterGame() {
         {phase === 'idle' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-8 z-10">
             <div className="text-center flex flex-col items-center">
-              <div className="mt-6 flex gap-6 justify-center font-sans text-xs text-neutral-600">
+              <div className="mt-6 flex flex-wrap gap-3 gap-x-5 sm:gap-x-6 justify-center font-sans text-[10px] sm:text-xs text-neutral-600">
                 <span><span className="text-white">■</span> Normal = +1</span>
                 <span><span className="text-yellow-400">■</span> Gold = +3</span>
                 <span><span className="text-purple-500">■</span> Cursed = -3</span>
@@ -458,14 +459,14 @@ export default function BoxBusterGame() {
             <button
               id="start-game-btn"
               onClick={startGame}
-              className="group relative px-12 py-4 bg-red-600 text-white font-sans text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-200"
+              className="group relative px-8 sm:px-12 py-3 sm:py-4 bg-red-600 text-white font-sans text-xs sm:text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-200"
               style={{ clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))' }}
             >
               START SESSION
             </button>
 
             {history.length > 0 && (
-              <div className="font-sans text-xs text-neutral-600 border border-white/5 px-6 py-4 w-72">
+              <div className="font-sans text-xs text-neutral-600 border border-white/5 px-4 sm:px-6 py-4 w-full max-w-72">
                 <p className="text-neutral-400 mb-3 tracking-widest">RECENT SESSIONS</p>
                 {history.map((h, i) => (
                   <div key={i} className="flex justify-between py-1 border-b border-white/5">
@@ -484,7 +485,7 @@ export default function BoxBusterGame() {
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <span
               key={countdown}
-              className={cn('text-[12rem] font-bold text-white leading-none', syne.className)}
+              className={cn('text-[clamp(4rem,20vw,12rem)] font-bold text-white leading-none', syne.className)}
               style={{
                 fontWeight: 800,
                 animation: 'countPop 0.7s ease-out forwards',
@@ -591,7 +592,7 @@ export default function BoxBusterGame() {
               // SESSION OVER //
             </p>
             <h2
-              className={cn('text-6xl font-bold text-white', syne.className)}
+              className={cn('text-4xl sm:text-5xl md:text-6xl font-bold text-white', syne.className)}
               style={{ fontWeight: 800 }}
             >
               {score}
@@ -604,7 +605,7 @@ export default function BoxBusterGame() {
               </p>
             )}
 
-            <div className="flex gap-8 font-sans text-xs text-neutral-500">
+            <div className="flex gap-6 sm:gap-8 font-sans text-xs text-neutral-500">
               <div className="text-center">
                 <p className="text-neutral-600">MAX COMBO</p>
                 <p className="text-white text-2xl font-bold">x{maxCombo}</p>
@@ -619,7 +620,7 @@ export default function BoxBusterGame() {
               <button
                 id="play-again-btn"
                 onClick={startGame}
-                className="px-10 py-3 bg-red-600 text-white font-sans text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-200"
+                className="px-6 sm:px-10 py-3 bg-red-600 text-white font-sans text-xs sm:text-sm uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all duration-200"
                 style={{ clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))' }}
               >
                 PLAY AGAIN
@@ -627,7 +628,7 @@ export default function BoxBusterGame() {
               <button
                 id="back-idle-btn"
                 onClick={() => setPhase('idle')}
-                className="px-10 py-3 border border-white/20 text-white font-sans text-sm uppercase tracking-widest hover:border-white/60 transition-all duration-200"
+                className="px-6 sm:px-10 py-3 border border-white/20 text-white font-sans text-xs sm:text-sm uppercase tracking-widest hover:border-white/60 transition-all duration-200"
               >
                 SCORES
               </button>
