@@ -35,6 +35,12 @@ export default function Hero({
                 opacity: 0,
                 duration: 1,
                 stagger: 0.2
+            }, '-=1')
+            .from('.hero-word', {
+                y: 20,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15
             }, '-=1');
 
     }, { scope: containerRef });
@@ -56,9 +62,11 @@ export default function Hero({
                     </p>
                 </div>
 
-                <div className="hero-desc absolute top-1/3 right-4 md:right-8 max-w-[200px] text-right">
-                    <p className="text-white/50 font-sans text-sm">
-                        DESIGN THAT MOVES THE WORLD.
+                <div className="absolute top-1/3 right-4 md:right-8 max-w-[200px] text-right">
+                    <p className="text-white/50 font-sans text-sm flex flex-wrap justify-end gap-x-[0.25em]">
+                        {"DESIGN THAT MOVES THE WORLD.".split(' ').map((word, i) => (
+                            <span key={i} className="hero-word inline-block">{word}</span>
+                        ))}
                     </p>
                 </div>
 
