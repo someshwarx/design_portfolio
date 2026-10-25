@@ -1,12 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export default function CustomCursor() {
+    const pathname = usePathname();
     const [isHovering, setIsHovering] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
     const cursorSize = isHovering ? 64 : 20;
+
+    if (pathname?.startsWith('/studio')) return null;
     
     const mouse = {
         x: useMotionValue(0),

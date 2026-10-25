@@ -1,12 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function ScrollToTop() {
+    const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
+
+    if (pathname?.startsWith('/studio')) return null;
 
     useEffect(() => {
         const toggleVisibility = () => {

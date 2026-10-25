@@ -71,19 +71,16 @@ export default function Hero({
                 </div>
 
                 {/* Massive Typography at the bottom */}
-                <div className="hero-title-wrapper w-full mt-auto flex justify-center items-end px-4 md:px-8">
-                    <svg viewBox="0 0 1000 180" className="w-full max-h-[30vh] overflow-visible">
-                        <text
-                            x="50%"
-                            y="130%"
-                            dominantBaseline="ideographic"
-                            textAnchor="middle"
-                            className={cn("fill-[#F0F0F0] font-black tracking-tighter uppercase", syne.className)}
-                            style={{ fontSize: '154px' }}
-                        >
-                            {title}
-                        </text>
-                    </svg>
+                <div className="hero-title-wrapper w-full mt-auto flex justify-center items-end px-4 md:px-8 pointer-events-none">
+                    <h1
+                        className={cn(
+                            "text-[12vw] leading-[0.75] font-black uppercase tracking-tighter text-[#F0F0F0] whitespace-nowrap select-none",
+                            syne.className
+                        )}
+                        style={{ fontWeight: 900 }}
+                    >
+                        {title}
+                    </h1>
                 </div>
             </div>
 

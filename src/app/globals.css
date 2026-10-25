@@ -121,7 +121,9 @@
     @apply border-border outline-ring/50;
 
     @media (hover: hover) and (pointer: fine) {
-      cursor: none;
+      body:not([data-route-studio="true"]) & {
+        cursor: none;
+      }
     }
 
     /* Hide scrollbar for Chrome, Safari and Opera */
@@ -134,6 +136,43 @@
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
+  }
+
+  /* Restore standard cursor and scrollbars inside Sanity Studio */
+  body:has(#sanity) *,
+  #sanity,
+  #sanity *,
+  [data-sanity],
+  [data-sanity] * {
+    cursor: auto !important;
+    scrollbar-width: auto !important;
+  }
+
+  body:has(#sanity) button,
+  body:has(#sanity) a,
+  body:has(#sanity) [role="button"],
+  #sanity button,
+  #sanity a,
+  #sanity [role="button"],
+  [data-sanity] button,
+  [data-sanity] a,
+  [data-sanity] [role="button"] {
+    cursor: pointer !important;
+  }
+
+  body:has(#sanity) input,
+  body:has(#sanity) textarea,
+  #sanity input,
+  #sanity textarea,
+  [data-sanity] input,
+  [data-sanity] textarea {
+    cursor: text !important;
+  }
+
+  body:has(#sanity) ::-webkit-scrollbar,
+  #sanity ::-webkit-scrollbar,
+  [data-sanity] ::-webkit-scrollbar {
+    display: block !important;
   }
 
   body {

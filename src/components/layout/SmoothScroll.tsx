@@ -14,6 +14,7 @@ if (typeof window !== 'undefined') {
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
     const lenisRef = useRef<any>(null);
     const pathname = usePathname();
+    const isStudio = pathname?.startsWith('/studio');
 
     useEffect(() => {
         if (lenisRef.current?.lenis) {
@@ -22,6 +23,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     }, [pathname]);
 
     useEffect(() => {
+        if (isStudio) return;
+
         // Sync GSAP ScrollTrigger with Lenis
         function update(time: number) {
             lenisRef.current?.lenis?.raf(time * 1000);
@@ -33,7 +36,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         return () => {
             gsap.ticker.remove(update);
         };
-    }, []);
+    }, [isStudio]);
+
+    if (isStudio) {
+        return <>{children}</>;
+    }
 
     return (
         <ReactLenis root ref={lenisRef} autoRaf={false} options={{ lerp: 0.08, wheelMultiplier: 1.2, smoothWheel: true }}>

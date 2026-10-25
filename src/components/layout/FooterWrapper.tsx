@@ -8,7 +8,7 @@ export default function FooterWrapper() {
 
     // Add any routes here where the footer should be hidden
     const hiddenRoutes = ['/about', '/lab'];
-    if (hiddenRoutes.includes(pathname)) {
+    if (hiddenRoutes.includes(pathname) || pathname?.startsWith('/studio')) {
         return null;
     }
 
