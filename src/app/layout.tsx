@@ -20,6 +20,7 @@ import Preloader from "@/components/ui/Preloader";
 import FooterWrapper from "@/components/layout/FooterWrapper";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import ConsoleMessage from "@/components/ui/ConsoleMessage";
+import { Analytics } from '@vercel/analytics/next';
 
 
 
@@ -64,6 +65,7 @@ export default function RootLayout({
           {/* Globally sticky parallax footer (conditionally rendered) */}
           <FooterWrapper />
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
